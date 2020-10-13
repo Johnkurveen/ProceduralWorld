@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>globalvar blockSize, chunkSize,
-    chunkLoadedSet, terrainMap, resourceMap, mapScale, waterLevel, hideEdges,
+    chunkLoadedSet, terrainMap, resourceMap, mapScale, mapSize, waterLevel, hideEdges,
     test, test2, TERRAIN, RESOURCES, res_constant, resource_info;
 
 //randomize();
@@ -37,7 +37,7 @@ blockSize = 8;
 chunkSize = 64;
 
 mapScale = 32;
-
+mapSize = power(2,12); // Max distance in any direction
 waterLevel = 45;
 
 hideEdges=1; // Generates chunks just before they are visible

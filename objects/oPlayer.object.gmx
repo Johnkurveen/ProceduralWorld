@@ -56,6 +56,13 @@ y += (keyboard_check(vk_down) - keyboard_check(vk_up)) * 1;
 x += (keyboard_check(ord("D")) - keyboard_check(ord("A"))) * 10;
 y += (keyboard_check(ord("S")) - keyboard_check(ord("W"))) * 10;
 
+if(abs(x)&gt;mapSize){
+    x=sign(x)*mapSize;
+}
+if(abs(y)&gt;mapSize){
+    y=sign(y)*mapSize;
+}
+
 
 // Allows increasing decreasing the value easily
 /*
