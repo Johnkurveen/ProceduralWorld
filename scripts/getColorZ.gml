@@ -13,7 +13,19 @@ else if(zz <= waterLevel+shore){ // Makes shore blocks sandy
     g=178;
     b=128;
 }
-else if(zz > 75){
+else if(zz = 102){ // Mark towns
+    g = 25;
+    b = 20;
+    r = 250;
+}
+else if(zz = 101){ // Mark towns
+    g = 25;
+    b = 20;
+    r = 50;
+}
+
+
+else if(zz > 75){ // For mountain tops
     g = 155+(zz-75)*100/(100-75);
     b = 155+(zz-75)*100/(100-75);
     r = 155+(zz-75)*100/(100-75);

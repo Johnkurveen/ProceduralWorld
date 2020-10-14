@@ -55,7 +55,7 @@ for (var i=0; i&lt;TERRAIN; i++){
     terrainMap[| i] = ds_map_create();
 }
 resourceMap = ds_list_create();
-for (var i=0; i&lt;RESOURCES; i++){
+for (var i=0; i&lt;RESOURCES+2; i++){
     resourceMap[| i] = ds_map_create();
 }
 
@@ -64,7 +64,7 @@ for (var i=0; i&lt;RESOURCES; i++){
 
 resource_info=6; // Price, amount, resource, point, tier, time. One per town per resource
 //resource_constants=5; // x, y, Cost, halflife, name. Once per resource
-resource_constants=7; // halflife, Cost, name, frequency, resolution (Number of perlin layers), Shore (0/1/2, both/only/no), min offset . Once per resource
+resource_constants=8; // halflife, Cost, name, frequency, resolution (Number of perlin layers), Shore (0/1/2, both/only/no), min offset, town weight. Once per resource
 resource_focus=0; 
 
 daytick=30*10; // Half a minute = 1 day // Should be 30*30
@@ -98,6 +98,7 @@ for (var R=0; R&lt;RESOURCES; R++){
         ds_grid_set(res_constant, 4, R, 3);  // Resolution
         ds_grid_set(res_constant, 5, R, 1);  // Shore both/only
         ds_grid_set(res_constant, 6, R, 10); // Offset from min
+        ds_grid_set(res_constant, 7, R, 50); // Weight for town establishment
         break;
         
     case 1:
@@ -106,7 +107,8 @@ for (var R=0; R&lt;RESOURCES; R++){
         ds_grid_set(res_constant, 3, R, 16); // Frequency
         ds_grid_set(res_constant, 4, R, 2);  // Resolution
         ds_grid_set(res_constant, 5, R, 0);  // Shore both/only
-        ds_grid_set(res_constant, 6, R, 0); // Offset from min
+        ds_grid_set(res_constant, 6, R, 0);  // Offset from min
+        ds_grid_set(res_constant, 7, R, 25); // Weight for town
         break;
         
     case 2:
@@ -116,6 +118,7 @@ for (var R=0; R&lt;RESOURCES; R++){
         ds_grid_set(res_constant, 4, R, 2);  // Resolution
         ds_grid_set(res_constant, 5, R, 0);  // Shore both/only
         ds_grid_set(res_constant, 6, R, -10); // Offset from min
+        ds_grid_set(res_constant, 7, R, 15); // Weight for town
         break;
         
     case 3:
@@ -125,6 +128,7 @@ for (var R=0; R&lt;RESOURCES; R++){
         ds_grid_set(res_constant, 4, R, 2);  // Resolution
         ds_grid_set(res_constant, 5, R, 2);  // Shore both/only/no
         ds_grid_set(res_constant, 6, R, -30); // Offset from min
+        ds_grid_set(res_constant, 7, R, 13); // Weight for town 
         break;
         
     default:

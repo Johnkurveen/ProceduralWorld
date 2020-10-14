@@ -172,6 +172,31 @@ for(var i = 0; i &lt; chunkSize / blockSize; i++){
                 draw_set_color( make_color_rgb(col,col,col));
             }
         }
+        else if(keyboard_check(ord("7"))&amp;&amp;RESOURCES&gt;3){ // Manages ranks
+            var rank; var resourceMax;
+            rank=ds_grid_get(resourceGrids[| 4], i, j)*cal; // scales max of 100 to 255
+            resourceMax=ds_grid_get(resourceGrids[| 5], i, j)
+            switch(resourceMax){
+            case(0):
+            case(3):
+                b=rank;
+                r=0; g=0;
+            break;
+            case(1):
+                g=rank;
+                r=0; b=0;
+            break;
+            case(2):
+                r=rank;
+                b=0; g=0;
+            break;
+            default:
+                r=20;
+                b=20;
+                g=20;
+            }
+            draw_set_color( make_color_rgb(r,g,b));
+        }
             
         else{
             col=ds_grid_get(terrainGrids[| 0], i, j); // This just needs 0-100 altitude
@@ -197,7 +222,7 @@ for(var i = 0; i &lt; chunkSize / blockSize; i++){
 
         //draw_set_color( getColorZ(grid[# i, j] ));
         draw_rectangle(x + i*blockSize, y + j*blockSize, 
-            x + (i+1)*blockSize,y + (j+1)*blockSize,false);
+            x + (i+1)*blockSize-1,y + (j+1)*blockSize-1,false);
     }
 }
 

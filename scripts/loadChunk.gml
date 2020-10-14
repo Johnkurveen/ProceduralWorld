@@ -1,10 +1,12 @@
 var i;
-terrainGrids=ds_list_create();
+terrainGrids=ds_list_create(); // list of 2D arrays, making a 3D array
 resourceGrids=ds_list_create();
+townGeneration=ds_list_create(); // 1D list of town attributes; max ranking, location x, location y
+townID=0; // Stores 0 for no town, or town's ID/key. Town stores location and resources
 for (i=0; i<TERRAIN; i++){
     terrainGrids[| i]=ds_grid_create(chunkSize/blockSize, chunkSize/blockSize);
 }
-for (i=0; i<RESOURCES; i++){
+for (i=0; i<RESOURCES+2; i++){
     resourceGrids[| i]=ds_grid_create(chunkSize/blockSize, chunkSize/blockSize);
 }
 
@@ -23,7 +25,7 @@ if(chunkExists(x,y)){// Reads the grid-specific data saved by unloadChunk
     for (i=0; i<TERRAIN; i++){
         ds_grid_read(terrainGrids[| i],ds_map_find_value(terrainMap[| i],getKey(x,y)));
     }
-    for (i=0; i<RESOURCES; i++){
+    for (i=0; i<RESOURCES+2; i++){
         ds_grid_read(resourceGrids[| i],ds_map_find_value(resourceMap[| i],getKey(x,y)));
     }
     

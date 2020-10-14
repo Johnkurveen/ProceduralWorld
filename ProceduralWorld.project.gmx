@@ -27,12 +27,17 @@
       <script>scripts\unloadChunk.gml</script>
     </scripts>
     <script>scripts\print.gml</script>
+    <script>scripts\Notes_on_Towns.gml</script>
     <script>scripts\Notes.gml</script>
+    <scripts name="town_stuff">
+      <script>scripts\townRank.gml</script>
+    </scripts>
   </scripts>
   <objects name="objects">
     <object>objects\oGenerator</object>
     <object>objects\oPlayer</object>
     <object>objects\oChunk</object>
+    <object>objects\oTown</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>

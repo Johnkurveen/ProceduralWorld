@@ -175,14 +175,19 @@ var tempID=chunkLoaded(px, py);
 //if(chunkExists(px,py)){ // chunkExists only applys to old chunks being loaded
 if(tempID){ // WORK IN PROGRESS!! Trying to print on mouseover
 //print(px);print(py);
-    for ( var i=0; i&lt;RESOURCES&amp;&amp;(chunkLoaded(px,py)); i++){
+    for ( var i=0; (i&lt;RESOURCES+1)&amp;&amp;(chunkLoaded(px,py)); i++){
         
         tempGrids[| i]=ds_grid_create(chunkSize/blockSize, chunkSize/blockSize);
         //print(getKey(px,py));print(getKey(xxx*chunkSize,yyy*chunkSize));
         //print(ds_map_find_value(resourceMap[| 0], getKey(0,0)));
         //ds_grid_read(tempGrids[| i], tempID.resourceGrids[| 0]);
         col=ds_grid_get(tempID.resourceGrids[| i], xxx, yyy);
-        draw_text (view_xview + 10, view_yview + room_height-20-15*i, ds_grid_get(res_constant,2, i)+": " + string(col) );
+        if(i=RESOURCES){
+            draw_text (view_xview + 10, view_yview + room_height-20-15*i, "rank: " + string(col) );
+        }
+        else{
+            draw_text (view_xview + 10, view_yview + room_height-20-15*i, ds_grid_get(res_constant,2, i)+": " + string(col) );
+        }
     }
 }
 
