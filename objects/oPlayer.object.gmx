@@ -25,8 +25,14 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>x = room_width / 2;
-y = room_height / 2;
+            <string>globalvar chunkNow, chunkOld, chunkChange;
+chunkOld=0;
+chunkChange=10;
+//x = room_width / 2;
+//y = room_height / 2;
+x=0;
+y=0;
+
 </string>
           </argument>
         </arguments>
@@ -51,8 +57,8 @@ y = room_height / 2;
             <kind>1</kind>
             <string>//movement
 // Having both of these lets you double the speed. Both arrows and wasd
-x += (keyboard_check(vk_right) - keyboard_check(vk_left)) * 1;
-y += (keyboard_check(vk_down) - keyboard_check(vk_up)) * 1;
+x += (keyboard_check(vk_right) - keyboard_check(vk_left)) * 100;
+y += (keyboard_check(vk_down) - keyboard_check(vk_up)) * 100;
 x += (keyboard_check(ord("D")) - keyboard_check(ord("A"))) * 10;
 y += (keyboard_check(ord("S")) - keyboard_check(ord("W"))) * 10;
 
@@ -98,6 +104,8 @@ else if (keyboard_check_pressed(ord("E"))){
 //pan screen
 view_xview = x - view_wview / 2;
 view_yview = y - view_hview / 2;
+
+//localCheck();
 </string>
           </argument>
         </arguments>
@@ -133,10 +141,10 @@ draw_set_color(c_yellow);
 draw_rectangle(x-room_width/2, y-room_height/2, x+room_width/2-1, y+room_height/2-1, true);
 
 
-draw_text (view_xview + 15, view_yview, "MouseX: " + string(mouse_x) );
-draw_text (view_xview + 15, view_yview+15, "MouseY: " + string(mouse_y) );
-draw_text (view_xview + 15, view_yview+30, "Frequency: " + string(test) );
-draw_text (view_xview + 15, view_yview+45, "Resolution: " + string(test2) );
+draw_text (view_xview + 10, view_yview, "MouseX: " + string(mouse_x) );
+draw_text (view_xview + 10, view_yview+15, "MouseY: " + string(mouse_y) );
+draw_text (view_xview + 10, view_yview+30, "Frequency: " + string(test) );
+draw_text (view_xview + 10, view_yview+45, "Resolution: " + string(test2) );
 
 
 var px = mouse_x;
@@ -173,23 +181,38 @@ var tempGrids=ds_list_create();
 var tempID=chunkLoaded(px, py);
 
 //if(chunkExists(px,py)){ // chunkExists only applys to old chunks being loaded
-if(tempID){ // WORK IN PROGRESS!! Trying to print on mouseover
+if(tempID){ 
 //print(px);print(py);
     for ( var i=0; (i&lt;RESOURCES+1)&amp;&amp;(chunkLoaded(px,py)); i++){
         
-        tempGrids[| i]=ds_grid_create(chunkSize/blockSize, chunkSize/blockSize);
+        //tempGrids[| i]=ds_grid_create(chunkSize/blockSize, chunkSize/blockSize);
         //print(getKey(px,py));print(getKey(xxx*chunkSize,yyy*chunkSize));
         //print(ds_map_find_value(resourceMap[| 0], getKey(0,0)));
         //ds_grid_read(tempGrids[| i], tempID.resourceGrids[| 0]);
         col=ds_grid_get(tempID.resourceGrids[| i], xxx, yyy);
         if(i=RESOURCES){
             draw_text (view_xview + 10, view_yview + room_height-20-15*i, "rank: " + string(col) );
+            draw_text (view_xview + 10, view_yview + room_height-20-15*(i+1), "teir: " + string(tempID.chunkData[| 1]) );
         }
         else{
             draw_text (view_xview + 10, view_yview + room_height-20-15*i, ds_grid_get(res_constant,2, i)+": " + string(col) );
         }
     }
+    
 }
+
+draw_text (view_xview + room_width-170, view_yview, "Chunks Total: " + string(chunksNumber) );
+draw_text (view_xview + room_width-115, view_yview+15, "Towns 1: " + string(townsNumber[| 1]) );
+draw_text (view_xview + room_width-115, view_yview+30, "Towns 2: " + string(townsNumber[| 2]) );
+draw_text (view_xview + room_width-115, view_yview+45, "Towns 3: " + string(townsNumber[| 3]) );
+draw_text (view_xview + room_width-115, view_yview+60, "Towns 4: " + string(townsNumber[| 4]) );
+draw_text (view_xview + room_width-115, view_yview+75, "Towns 5: " + string(townsNumber[| 5]) );
+
+
+draw_text (view_xview + room_width-115, view_yview + room_height-20, "room: " + string(room_speed) );
+draw_text (view_xview + room_width-115, view_yview + room_height-20-15, "fpsr: " + string(fps_real) );
+draw_text (view_xview + room_width-115, view_yview + room_height-20-15*2, "fps: " + string(fps) );
+
 
 
 </string>

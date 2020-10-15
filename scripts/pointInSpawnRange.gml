@@ -11,7 +11,7 @@ var playerchunky=oPlayer.y;
 //var d = point_distance(playerchunkx,playerchunky,xx,yy);
 var dx=abs(xx-playerchunkx);
 var dy=abs(yy-playerchunky);
-if((dx<room_width/2+hideEdges*chunkSize/2)&&(dy<room_height/2+hideEdges*chunkSize/2)){
+if((dx<room_width/2+(hideEdges)*chunkSize/2)&&(dy<room_height/2+(hideEdges)*chunkSize/2)){
     return 1;
 }
 else{

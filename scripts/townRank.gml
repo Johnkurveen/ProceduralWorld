@@ -8,6 +8,14 @@ temp6=ds_list_create();
 var teir=1; // 1->resources
 var teirR;  // For teirs over 3, limits resources to top 3
 
+random_set_seed(x*power(2,10)+y);
+var townPop=random_range(0, 100);
+//Teir 5 1.2%
+if (townPop<5){ teirR=4; } //5%>8.6%
+else if (townPop<15){ teirR=3; }// 10%>15.7%
+else if (townPop<40){ teirR=2; }// 25%>23.9%
+else { teirR=1; }// 60%>50.6%
+
 
 //Loop through grid
 for(var ii = 0; ii < chunkSize / blockSize; ii++){
@@ -27,12 +35,12 @@ for(var ii = 0; ii < chunkSize / blockSize; ii++){
             ds_list_set(bestofBlock, vv, rank);
         }
         rank=0;
-        if (teir>3){
+        /*if (teir>3){
             teirR=3;
         }
         else{
             teirR=teir;
-        }
+        }*/
         ds_list_copy(temp6, bestofBlock)
         ds_list_sort(bestofBlock, false); // Sort list by highest rank
         // Take last layer used in the ranking- map that color
@@ -55,8 +63,16 @@ for(var ii = 0; ii < chunkSize / blockSize; ii++){
     }
 }
 if(rankMax>threshold){
-    ds_grid_set(terrainGrids[| 0], maxii, maxjj, 102);
+    ds_grid_set(terrainGrids[| 0], maxii, maxjj, 101);
+    //ds_grid_set(resourceGrids[| 0], maxii, maxjj, 100);
+    chunkData[| 1]=teirR;
+    townsNumber[| teirR]++;
 }
+else{
+    chunkData[| 0]=0;
+    chunkData[| 1]=0;
+}
+
 
 
 //Return max ranking block- value and coordinates

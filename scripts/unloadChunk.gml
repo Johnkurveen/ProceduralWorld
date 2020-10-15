@@ -10,6 +10,13 @@ for (i=0; i<RESOURCES+2; i++){
     ds_grid_destroy(resourceGrids[| i]);
 }
 
+for (i=0; i<2; i++){
+    ds_map_replace(chunkDataMap, getKey(x,y), ds_list_write(chunkData));
+    //ds_list_destroy(chunkData);
+}
+
+
+
 //ds_map_replace(chunkMap[| 1],getKey(x,y), ds_grid_write(testing[| 1]));
 
 

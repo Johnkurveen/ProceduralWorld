@@ -4,17 +4,30 @@ var alt;
 var rank=0;
 townGeneration[| 0]=0;
 var threshold=70;
-var hasTown=0;
+//var hasTown;
+var townPop=0;
+hasTown=0
+// Calculates if chunk can have a town
 random_set_seed(x+y*power(2,10));
-if(random_range(1, 100)>=98){
+townPop=random_range(1, 1000)-980;
+if(townPop>0){
     hasTown=1;
 }
+
+chunkData[| 0]=hasTown;
+chunkData[| 1]=hasTown;
 //var maxi, maxj;
 
 // Generates the chunk by block
 for(var i = 0; i < chunkSize / blockSize; i++){
     for(var j = 0; j < chunkSize / blockSize; j++){
-        alt = getPerlinNoise_2D(x / blockSize + i,y / blockSize + j,0);
+        // Can be shown to display hastown chunks
+        if (1/*hasTown==0*/){
+            alt = getPerlinNoise_2D(x / blockSize + i,y / blockSize + j,0);
+        }
+        else{
+            alt = 101;
+        }
         ds_grid_set(terrainGrids[| 0], i, j, alt);
         for (var v=1; v<TERRAIN; v++){ // Starts at v=1 since altitude is done before this
             ds_grid_set(terrainGrids[| v], i, j, getPerlinNoise_2D(x / blockSize + i,y / blockSize + j,v));
@@ -51,6 +64,7 @@ for(var i = 0; i < chunkSize / blockSize; i++){
                 ds_grid_set(resourceGrids[| v], i, j, 0);
             }
         }
+        /*
         rank=0;
         for(v=0; v<RESOURCES; v++){
             rank+=ds_grid_get(resourceGrids[| v], i, j);
@@ -62,10 +76,16 @@ for(var i = 0; i < chunkSize / blockSize; i++){
             townGeneration[| 0]=rank;
             townGeneration[| 1]=i;
             townGeneration[| 2]=j;
-        }
+        }*/
         
     }
 }
+
+if(hasTown==1){
+    localCheck();
+}
+
+
 // Mark location of town
 if(townGeneration[| 0]>threshold&&hasTown==1){
     /*for(v=0; v<RESOURCES; v++){
@@ -73,7 +93,8 @@ if(townGeneration[| 0]>threshold&&hasTown==1){
     }*/
     ds_grid_set(terrainGrids[| 0], townGeneration[| 1], townGeneration[| 2], 101);
 }
-townRank();
+//townRank();
 ds_list_destroy(townGeneration);
+chunksNumber++;
 
 

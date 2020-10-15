@@ -26,8 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>globalvar blockSize, chunkSize,
-    chunkLoadedSet, terrainMap, resourceMap, mapScale, mapSize, waterLevel, hideEdges,
-    test, test2, TERRAIN, RESOURCES, res_constant, resource_info;
+    chunkLoadedSet, terrainMap, resourceMap, chunkDataMap, mapScale, mapSize, waterLevel, hideEdges,
+    test, test2, TERRAIN, RESOURCES, res_constant, resource_info, townsNumber, chunksNumber;
 
 //randomize();
 seed = round(random_range(1000000,10000000));
@@ -40,7 +40,8 @@ mapScale = 32;
 mapSize = power(2,12); // Max distance in any direction
 waterLevel = 45;
 
-hideEdges=1; // Generates chunks just before they are visible
+hideEdges=1; // Generates and shows chunks just before they are visible
+distantGenerate=13; // generates towns further away but doesn't display them. n chunks any direction square
 
 test=16;
 test2=4;
@@ -55,8 +56,15 @@ for (var i=0; i&lt;TERRAIN; i++){
     terrainMap[| i] = ds_map_create();
 }
 resourceMap = ds_list_create();
-for (var i=0; i&lt;RESOURCES+2; i++){
+for (i=0; i&lt;RESOURCES+2; i++){
     resourceMap[| i] = ds_map_create();
+}
+
+chunkDataMap = ds_map_create();
+townsNumber=ds_list_create();
+chunksNumber=0;
+for (i=0; i&lt;10; i++){
+    townsNumber[| i]=0;
 }
 
 /***Will need map frequency and Perlin constants****/

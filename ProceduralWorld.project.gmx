@@ -31,6 +31,7 @@
     <script>scripts\Notes.gml</script>
     <scripts name="town_stuff">
       <script>scripts\townRank.gml</script>
+      <script>scripts\localCheck.gml</script>
     </scripts>
   </scripts>
   <objects name="objects">

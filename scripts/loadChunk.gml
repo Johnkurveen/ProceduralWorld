@@ -1,4 +1,6 @@
 var i;
+var hasTown;
+chunkData=ds_list_create();
 terrainGrids=ds_list_create(); // list of 2D arrays, making a 3D array
 resourceGrids=ds_list_create();
 townGeneration=ds_list_create(); // 1D list of town attributes; max ranking, location x, location y
@@ -29,7 +31,9 @@ if(chunkExists(x,y)){// Reads the grid-specific data saved by unloadChunk
         ds_grid_read(resourceGrids[| i],ds_map_find_value(resourceMap[| i],getKey(x,y)));
     }
     
-    
+    for (i=0; i<2; i++){
+        ds_list_read(chunkData,ds_map_find_value(chunkDataMap,getKey(x,y)));
+    }
     //var str = ds_map_find_value(chunkMap,getKey(x,y));
     //ds_grid_read(testing[| 0],ds_map_find_value(chunkMap[| 0],getKey(x,y)));
     //ds_grid_read(testing[| 1],ds_map_find_value(chunkMap[| 1],getKey(x,y)));
