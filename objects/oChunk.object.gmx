@@ -72,7 +72,7 @@
           <argument>
             <kind>1</kind>
             <string>//check for despawn
-if(pointInDespawnRange(x+chunkSize/2,y+chunkSize/2)){
+if(pointInDespawnRange(x,y)){
     instance_destroy();
 }
 

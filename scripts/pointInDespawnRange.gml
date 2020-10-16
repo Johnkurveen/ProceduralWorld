@@ -2,17 +2,28 @@ var xx = argument0;
 var yy = argument1;
 
 // Find the center of the chunk the player is in
-//var playerchunkx=floor(oPlayer.x/chunkSize)*chunkSize+chunkSize/2;
-//var playerchunky=floor(oPlayer.y/chunkSize)*chunkSize+chunkSize/2;
-var playerchunkx=oPlayer.x;
-var playerchunky=oPlayer.y;
+//var px=floor(oPlayer.x/chunkSize)*chunkSize+chunkSize/2;
+//var py=floor(oPlayer.y/chunkSize)*chunkSize+chunkSize/2;
+var px=oPlayer.x;
+var py=oPlayer.y;
+if(px<0){
+    px-=chunkSize;
+}
+if(py<0){
+    py-=chunkSize;
+}
+px -= px % chunkSize; // Origin of current chunk
+py -= py % chunkSize;
+xx -= xx % chunkSize; // Origin of chunk in question
+yy -= yy % chunkSize;
 
 
-//var d = point_distance(playerchunkx,playerchunky,xx,yy);
+//var d = point_distance(px,py,xx,yy);
 //return d > seeRadius;
-var dx=abs(xx-playerchunkx);
-var dy=abs(yy-playerchunky);
-if((dx>=room_width/2+hideEdges*chunkSize/2)||(dy>=room_height/2+hideEdges*chunkSize/2)){
+var dx=abs(xx-px)+1;
+//var dy=abs(yy-py);
+var dy=abs(yy-py)+1;
+if((dx>=room_width/2+(hideEdges+1)*chunkSize)||(dy>=room_height/2+(hideEdges+1)*chunkSize)){
     return 1;
 }
 else{
