@@ -25,13 +25,16 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>globalvar chunkNow, chunkOld, chunkChange;
+            <string>globalvar chunkNow, chunkOld, chunkChange, showR;
+showR=0;
 chunkOld=0;
 chunkChange=10;
 //x = room_width / 2;
 //y = room_height / 2;
 x=0;
 y=0;
+
+
 
 </string>
           </argument>
@@ -57,10 +60,24 @@ y=0;
             <kind>1</kind>
             <string>//movement
 // Having both of these lets you double the speed. Both arrows and wasd
-x += (keyboard_check(vk_right) - keyboard_check(vk_left)) * 100;
-y += (keyboard_check(vk_down) - keyboard_check(vk_up)) * 100;
-x += (keyboard_check(ord("D")) - keyboard_check(ord("A"))) * 10;
-y += (keyboard_check(ord("S")) - keyboard_check(ord("W"))) * 10;
+x += (keyboard_check(vk_right) - keyboard_check(vk_left)) * 1;
+y += (keyboard_check(vk_down) - keyboard_check(vk_up)) * 1;
+x += (keyboard_check(ord("D")) - keyboard_check(ord("A"))) * 8;
+y += (keyboard_check(ord("S")) - keyboard_check(ord("W"))) * 8;
+
+x += (keyboard_check(ord("L")) - keyboard_check(ord("J"))) * 64;
+y += (keyboard_check(ord("K")) - keyboard_check(ord("I"))) * 64;
+
+
+//showR= !keyboard_check_pressed(192);
+
+
+if(keyboard_check_pressed(192)){
+showR= !showR;
+}
+
+
+
 
 if(abs(x)&gt;mapSize){
     x=sign(x)*mapSize;

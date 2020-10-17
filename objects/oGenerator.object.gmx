@@ -173,6 +173,7 @@ for (var R=0; R&lt;RESOURCES; R++){
           <argument>
             <kind>1</kind>
             <string>spawnChunks();
+
 </string>
           </argument>
         </arguments>
