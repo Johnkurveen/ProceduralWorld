@@ -226,9 +226,9 @@ draw_text (view_xview + room_width-115, view_yview+60, "Towns 4: " + string(town
 draw_text (view_xview + room_width-115, view_yview+75, "Towns 5: " + string(townsNumber[| 5]) );
 
 
-draw_text (view_xview + room_width-115, view_yview + room_height-20, "room: " + string(room_speed) );
+//draw_text (view_xview + room_width-115, view_yview + room_height-20, "room: " + string(room_speed) );
 draw_text (view_xview + room_width-115, view_yview + room_height-20-15, "fpsr: " + string(fps_real) );
-draw_text (view_xview + room_width-115, view_yview + room_height-20-15*2, "fps: " + string(fps) );
+draw_text (view_xview + room_width-105, view_yview + room_height-20-15*2*0, "fps: " + string(fps) );
 
 
 

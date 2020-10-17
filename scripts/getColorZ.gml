@@ -1,9 +1,13 @@
+//Move to code directly
+//Provides ~4 fps increase
+
 var zz = argument0;
+//var waterLevel = waterLevel;
 var r=0,b=0,g=0;
 var mountian=75;
 var shore=1; // shore offset
 
-//var waterLevel = 45;
+//var waterLevel = waterLevel;
 
 
 if((zz > waterLevel+shore)&&(zz<=mountian)){

@@ -1,10 +1,10 @@
 var px = oPlayer.x;
 var py = oPlayer.y;
 
-//var corners;//, topRight, topLeft, bottomRight, bottomLeft;
-//globalvar moved;
-//moved=0;
-//corners=ds_list_create();
+var corners;//, topRight, topLeft, bottomRight, bottomLeft;
+globalvar moved;
+moved=0;
+corners=ds_list_create();
 
 if(px<0){
     px-=chunkSize;
@@ -20,9 +20,10 @@ py -= py % chunkSize;
 // Radius of most chunks visible, in pixels
 var chunkx = chunkSize * (floor((room_width/2)/chunkSize)+hideEdges);
 var chunky = chunkSize * (floor((room_height/2)/chunkSize)+hideEdges);
+//var chunkx = (((room_width/2)) + chunkSize*hideEdges);
+//var chunky = (((room_height/2))+ chunkSize*hideEdges);
 
-/*
-corners[| 0]=!chunkLoaded(px - chunkx+chunkSize, py - chunky+chunkSize);
+corners[| 0]=!chunkLoaded(px - chunkx, py - chunky);
 corners[| 1]=!chunkLoaded(px + chunkx-chunkSize, py - chunky+chunkSize);
 corners[| 2]=!chunkLoaded(px - chunkx+chunkSize, py + chunky-chunkSize);
 corners[| 3]=!chunkLoaded(px + chunkx-chunkSize, py + chunky-chunkSize);
@@ -34,7 +35,7 @@ for(var i=0; i<4; i++){
     moved+=corners[| i];
 }
 print(moved);
-if(moved){*/
+//if(moved){
 
 
 

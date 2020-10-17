@@ -119,9 +119,12 @@ if(0){
             <string>var r=0, g=0, b=0;
 var cal=255/100;
 var check=1;
+var i, j;
 
-for(var i = 0; i &lt; chunkSize / blockSize; i++){
-    for(var j = 0; j &lt; chunkSize / blockSize; j++){
+var size=chunkSize / blockSize;
+
+for(i = 0; i &lt; size; i++){
+    for(j = 0; j &lt; size; j++){
         
         if(showR){
             check=0;
@@ -210,9 +213,11 @@ for(var i = 0; i &lt; chunkSize / blockSize; i++){
                 check=1;
             }
             }
+            // Draw alt map
             if(check){
+
                 col=ds_grid_get(terrainGrids[| 0], i, j); // This just needs 0-100 altitude
-                draw_set_color( getColorZ(col ));
+                draw_set_color( getColorZ(col));
             }
         /*
         var px = mouse_x; // This code will highlight the block under the mouse
@@ -241,8 +246,8 @@ for(var i = 0; i &lt; chunkSize / blockSize; i++){
 
 
 // Draws chunk boundry
-//draw_set_color(c_red);
-//draw_rectangle(x,y,x+chunkSize,y+chunkSize,true);
+draw_set_color(c_red);
+draw_rectangle(x,y,x+chunkSize,y+chunkSize,true);
 
 draw_set_color(c_black);
 
