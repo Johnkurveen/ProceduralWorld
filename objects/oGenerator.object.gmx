@@ -40,7 +40,7 @@ mapScale = 32;
 mapSize = power(2,12); // Max distance in any direction
 waterLevel = 45;
 
-hideEdges=1; // Generates and shows chunks just before they are visible
+hideEdges=0; // Generates and shows chunks just before they are visible
 distantGenerate=13; // generates towns further away but doesn't display them. n chunks any direction square
 
 test=16;

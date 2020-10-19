@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>globalvar chunkNow, chunkOld, chunkChange, showR;
+            <string>globalvar chunkNow, chunkOld, chunkChange, showR, corners;
+corners=ds_list_create();
 showR=0;
 chunkOld=0;
 chunkChange=10;
@@ -229,6 +230,10 @@ draw_text (view_xview + room_width-115, view_yview+75, "Towns 5: " + string(town
 //draw_text (view_xview + room_width-115, view_yview + room_height-20, "room: " + string(room_speed) );
 draw_text (view_xview + room_width-115, view_yview + room_height-20-15, "fpsr: " + string(fps_real) );
 draw_text (view_xview + room_width-105, view_yview + room_height-20-15*2*0, "fps: " + string(fps) );
+
+
+//draw_set_colour(c_yellow);
+//draw_rectangle(corners[| 0], corners[| 1], corners[| 2], corners[| 3], true);
 
 
 

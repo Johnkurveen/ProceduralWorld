@@ -12,7 +12,7 @@ var playerchunky=oPlayer.y;
 //return d > seeRadius;
 var dx=abs(xx-playerchunkx);
 var dy=abs(yy-playerchunky);
-if((dx>=room_width/2+hideEdges*chunkSize/2)||(dy>=room_height/2+hideEdges*chunkSize/2)){
+if((dx>room_width/2+(hideEdges+.5)*chunkSize)||(dy>room_height/2+(hideEdges+.5)*chunkSize)){
     return 1;
 }
 else{

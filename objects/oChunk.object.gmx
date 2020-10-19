@@ -120,8 +120,17 @@ if(0){
 var cal=255/100;
 var check=1;
 var i, j;
-
 var size=chunkSize / blockSize;
+
+var zz;
+var waterLevelTemp=waterLevel;
+var r=0,b=0,g=0;
+var mountian=75;
+var shore=1; // shore offset
+
+
+
+
 
 for(i = 0; i &lt; size; i++){
     for(j = 0; j &lt; size; j++){
@@ -215,29 +224,47 @@ for(i = 0; i &lt; size; i++){
             }
             // Draw alt map
             if(check){
-
-                col=ds_grid_get(terrainGrids[| 0], i, j); // This just needs 0-100 altitude
-                draw_set_color( getColorZ(col));
+                zz=ds_grid_get(terrainGrids[| 0], i, j); // This just needs 0-100 altitude
+                if((zz &gt; waterLevelTemp+shore)&amp;&amp;(zz&lt;=mountian)){
+                    //g = 50 + ((zz - waterLevelTemp) / (100-waterLevelTemp)) * 200;
+                    g = 50 + (zz - waterLevelTemp) * 3.7;
+                    r=0; b=0;
+                }
+                else if(zz &lt; waterLevelTemp){
+                    b = 50 + (zz / waterLevelTemp) * 200;
+                    r=0; g=0;
+                }
+                else if(zz &lt;= waterLevelTemp+shore){ // Makes shore blocks sandy
+                    r=194;
+                    g=178;
+                    b=128;
+                }
+                else if(zz == 102){ // Mark towns
+                    g = 25;
+                    b = 20;
+                    r = 250;
+                }
+                else if(zz == 101){ // Mark towns
+                    g = 25;
+                    b = 20;
+                    r = 50;
+                }
+                else if(zz &gt; mountian){ // For mountain tops
+                    g = 155+(zz-75)*100/(100-75);
+                    b = 155+(zz-75)*100/(100-75);
+                    r = 155+(zz-75)*100/(100-75);
+                }
+                else{
+                    r=50; g=50; b=50;
+                }
+            
+            
+            
+                //col=ds_grid_get(terrainGrids[| 0], i, j); // This just needs 0-100 altitude
+                //draw_set_color( getColorZ(col, waterLevelTemp));
+                draw_set_color(make_color_rgb(r,g,b));
             }
-        /*
-        var px = mouse_x; // This code will highlight the block under the mouse
-        var py = mouse_y;
-        var xxx;
-        var yyy;
-        
-        px -= px % chunkSize; // Origin of current chunk
-        py -= py % chunkSize;
-        
-        xxx= floor((mouse_x%chunkSize)/blockSize);
-        yyy= floor((mouse_y%chunkSize)/blockSize);
-        
-        if(sign(mouse_x) == -1){xxx = chunkSize/blockSize-0 + xxx; px-=chunkSize;} // Handles negative numbers
-        if(sign(mouse_y) == -1){yyy = chunkSize/blockSize-0 + yyy; py-=chunkSize;}
-        if(xxx==i&amp;&amp;yyy==j&amp;&amp;px==x&amp;&amp;py==y){
-            draw_set_color( make_color_rgb(255,0,0));
-        }
-        */
-        //draw_set_color( getColorZ(grid[# i, j] ));
+
         draw_rectangle(x + i*blockSize, y + j*blockSize, 
             x + (i+1)*blockSize-1,y + (j+1)*blockSize-1,false);
         
