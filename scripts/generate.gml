@@ -22,7 +22,7 @@ chunkData[| 1]=hasTown;
 for(var i = 0; i < chunkSize / blockSize; i++){
     for(var j = 0; j < chunkSize / blockSize; j++){
         // Can be shown to display hastown chunks
-        if (1/*hasTown==0*/){
+        if (1){
             alt = getPerlinNoise_2D(x / blockSize + i,y / blockSize + j,0);
         }
         else{

@@ -16,5 +16,5 @@ if((dx>room_width/2+(hideEdges+.5)*chunkSize)||(dy>room_height/2+(hideEdges+.5)*
     return 1;
 }
 else{
-return 0;
+    return 0;
 }

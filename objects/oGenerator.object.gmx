@@ -26,8 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>globalvar blockSize, chunkSize,
-    chunkLoadedSet, terrainMap, resourceMap, chunkDataMap, mapScale, mapSize, waterLevel, hideEdges,
-    test, test2, TERRAIN, RESOURCES, res_constant, resource_info, townsNumber, chunksNumber;
+    chunkLoadedSet, chunkBuffer, terrainMap, resourceMap, chunkDataMap, mapScale, mapSize, waterLevel, hideEdges,
+    test, test2, TERRAIN, RESOURCES, res_constant, resource_info, townsNumber, chunksNumber, areaGenerate, distantGenerate;
 
 //randomize();
 seed = round(random_range(1000000,10000000));
@@ -38,10 +38,11 @@ chunkSize = 64;
 
 mapScale = 32;
 mapSize = power(2,12); // Max distance in any direction
-waterLevel = 45;
+waterLevel = 44;
 
 hideEdges=0; // Generates and shows chunks just before they are visible
-distantGenerate=13; // generates towns further away but doesn't display them. n chunks any direction square
+distantGenerate=16; // generates towns further away but doesn't display them. n chunks any direction square
+areaGenerate=1;
 
 test=16;
 test2=4;
@@ -50,6 +51,7 @@ RESOURCES=4; // Number of resources
 TERRAIN=1;
 
 chunkLoadedSet = ds_map_create();
+chunkBuffer = ds_map_create();
 
 terrainMap = ds_list_create();
 for (var i=0; i&lt;TERRAIN; i++){
@@ -173,6 +175,7 @@ for (var R=0; R&lt;RESOURCES; R++){
           <argument>
             <kind>1</kind>
             <string>spawnChunks();
+despawnChunks();
 
 </string>
           </argument>

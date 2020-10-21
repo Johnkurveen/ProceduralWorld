@@ -72,8 +72,10 @@
           <argument>
             <kind>1</kind>
             <string>//check for despawn
-if(pointInDespawnRange(x+chunkSize/2,y+chunkSize/2)){
-    instance_destroy();
+if(get_timer()*100%10000==0){
+    if(pointInDespawnRange(x+chunkSize/2,y+chunkSize/2)){
+        instance_destroy();
+    }
 }
 
 //mouse interaction
@@ -124,9 +126,8 @@ var size=chunkSize / blockSize;
 
 var zz;
 var waterLevelTemp=waterLevel;
-var r=0,b=0,g=0;
 var mountian=75;
-var shore=1; // shore offset
+var shore=2; // shore offset
 
 
 
@@ -134,11 +135,8 @@ var shore=1; // shore offset
 
 for(i = 0; i &lt; size; i++){
     for(j = 0; j &lt; size; j++){
-        
         if(showR){
             check=0;
-    
-    
     
             if(keyboard_check(ord("1"))&amp;&amp;RESOURCES&gt;0){
                 col=ds_grid_get(resourceGrids[| 0], i, j)*cal;
@@ -221,7 +219,9 @@ for(i = 0; i &lt; size; i++){
             else{
                 check=1;
             }
-            }
+        } // End resource maps
+        
+        
             // Draw alt map
             if(check){
                 zz=ds_grid_get(terrainGrids[| 0], i, j); // This just needs 0-100 altitude
@@ -230,7 +230,7 @@ for(i = 0; i &lt; size; i++){
                     g = 50 + (zz - waterLevelTemp) * 3.7;
                     r=0; b=0;
                 }
-                else if(zz &lt; waterLevelTemp){
+                else if(zz &lt;= waterLevelTemp){
                     b = 50 + (zz / waterLevelTemp) * 200;
                     r=0; g=0;
                 }
@@ -265,16 +265,16 @@ for(i = 0; i &lt; size; i++){
                 draw_set_color(make_color_rgb(r,g,b));
             }
 
-        draw_rectangle(x + i*blockSize, y + j*blockSize, 
-            x + (i+1)*blockSize-1,y + (j+1)*blockSize-1,false);
+            draw_rectangle(x + i*blockSize, y + j*blockSize, 
+                    x + (i+1)*blockSize-1,y + (j+1)*blockSize-1,false);
         
     }
 }
 
 
 // Draws chunk boundry
-draw_set_color(c_red);
-draw_rectangle(x,y,x+chunkSize,y+chunkSize,true);
+//draw_set_color(c_red);
+//draw_rectangle(x,y,x+chunkSize,y+chunkSize,true);
 
 draw_set_color(c_black);
 

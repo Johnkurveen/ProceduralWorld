@@ -25,8 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>globalvar chunkNow, chunkOld, chunkChange, showR, corners;
+            <string>globalvar chunkNow, chunkOld, chunkChange, showR, corners, moveX, moveY;
 corners=ds_list_create();
+moveX=5; moveY=5;
 showR=0;
 chunkOld=0;
 chunkChange=10;
@@ -59,27 +60,54 @@ y=0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//movement
-// Having both of these lets you double the speed. Both arrows and wasd
-x += (keyboard_check(vk_right) - keyboard_check(vk_left)) * 1;
-y += (keyboard_check(vk_down) - keyboard_check(vk_up)) * 1;
+            <string>moveX=x;
+moveY=y;
+
+
+//movement
+// Includes three different speed modes. Arrows=1, wasd=8, ijkl=64
+x += (keyboard_check(vk_right) - keyboard_check(vk_left) ) * 1;
+y += (keyboard_check(vk_down ) - keyboard_check(vk_up  ) ) * 1;
 x += (keyboard_check(ord("D")) - keyboard_check(ord("A"))) * 8;
 y += (keyboard_check(ord("S")) - keyboard_check(ord("W"))) * 8;
 
 x += (keyboard_check(ord("L")) - keyboard_check(ord("J"))) * 64;
 y += (keyboard_check(ord("K")) - keyboard_check(ord("I"))) * 64;
 
+if(moveX!=x){
+    moveX=sign(x-moveX);
 
-//showR= !keyboard_check_pressed(192);
+}
+else{
+    moveX=0;
+}
+
+if(moveY!=y){
+    moveY=sign(y-moveY);
+
+}
+else{
+    moveY=0;
+}
 
 
+//print(moveY);
+
+// This sets "~" to enable #1-#7 to show resource maps
+// The setup allows faster computing for most of the time
 if(keyboard_check_pressed(192)){
-showR= !showR;
+    showR= !showR;
+}
+
+// M to generate the region
+if(keyboard_check_pressed(ord("M"))){
+    areaGenerate=1;
 }
 
 
 
 
+// Sets a boarder to the map
 if(abs(x)&gt;mapSize){
     x=sign(x)*mapSize;
 }
@@ -152,15 +180,17 @@ draw_circle(x,y,10,false);
 draw_set_alpha(1);
 //draw_set_color(c_green);
 //draw_circle(x,y,seeRadius,true);
-draw_set_color(c_red);
+//draw_set_color(c_red);
 //(floor(x/chunkSize)+.5)*chunkSize
 //draw_circle((floor(x/chunkSize)+.5)*chunkSize,(floor(y/chunkSize)+.5)*chunkSize,seeRadius,true);
-draw_set_color(c_yellow);
+draw_set_color(c_white);
 draw_rectangle(x-room_width/2, y-room_height/2, x+room_width/2-1, y+room_height/2-1, true);
+draw_set_color(c_yellow);
 
-
-draw_text (view_xview + 10, view_yview, "MouseX: " + string(mouse_x) );
-draw_text (view_xview + 10, view_yview+15, "MouseY: " + string(mouse_y) );
+//draw_text (view_xview + 10, view_yview, "MouseX: " + string(mouse_x) );
+//draw_text (view_xview + 10, view_yview+15, "MouseY: " + string(mouse_y) );
+draw_text (view_xview + 10, view_yview,    "Player X: " + string(x) );
+draw_text (view_xview + 10, view_yview+15, "Player Y: " + string(y) );
 draw_text (view_xview + 10, view_yview+30, "Frequency: " + string(test) );
 draw_text (view_xview + 10, view_yview+45, "Resolution: " + string(test2) );
 
